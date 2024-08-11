@@ -1,0 +1,15 @@
+data_xinyi.m 以及data_yinshan数据文件需要命名为： data_guizhou.m 并存入运行文件的文件夹
+现在运行文件的文件夹中的data_guizhou.m  实际为data_xinyi.m的数据用作测试，可覆盖或者直接删除，再重新命名存入
+
+% 输出结果：
+DLMPs.xlsx 
+    对应坐标及标题：
+        xlabel('小时(h)');
+        ylabel('节点');
+        title('节点边际电价(CNY/kWh)');
+Loadshedding.xlsx
+    对应坐标及标题：
+    xlabel('小时(h)');
+    ylabel('节点');
+    title('负荷调控结果(MWh)');
+
