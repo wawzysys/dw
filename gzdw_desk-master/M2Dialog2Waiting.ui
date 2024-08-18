@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>M2Dialog2</class>
+ <widget class="QDialog" name="M2Dialog2">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>608</width>
+    <height>290</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>正在运行中......</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QMainWindow{
+background-color:rgb(234, 234, 234)
+}
+QLabel{
+font: bold 18px &quot;Microsoft YaHei&quot;;
+background-color:rgb(255, 255, 255);
+}
+QPushButton{
+background-color:rgb(0, 170, 255);
+font: bold 19px &quot;Microsoft YaHei&quot;;
+color: white;
+border-radius: 10px
+
+}
+QPushButton:hover{
+	border-style: solid;
+	border-color: rgb(125, 255, 39);
+	border-width: 1px;
+	border-radius: 5px;
+	color: white;
+	padding: 2px;
+	background-color: rgb(85, 170, 255);
+}
+QPushButton:pressed{
+	border-style: solid;
+	border-color: #050a0e;
+	border-width: 1px;
+	border-radius: 5px;
+	color: white;
+	padding: 2px;
+	background-color: rgb(0, 170, 127);
+}</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QFrame" name="frame">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+       <horstretch>0</horstretch>
+       <verstretch>4</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::StyledPanel</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Raised</enum>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout_2">
+      <item>
+       <widget class="QLabel" name="label">
+        <property name="font">
+         <font>
+          <family>Microsoft YaHei</family>
+          <pointsize>-1</pointsize>
+          <weight>75</weight>
+          <italic>false</italic>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">
+QLabel{
+font: bold 18px &quot;Microsoft YaHei&quot;;
+background-color:rgb(255, 255, 255);
+}
+
+
+</string>
+        </property>
+        <property name="text">
+         <string>正在生成负荷调控结果，时间较长，大概2到5分钟，请稍等.....</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QFrame" name="frame_2">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+       <horstretch>0</horstretch>
+       <verstretch>1</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton{
+	border-style: solid;
+	border-color: rgb(90, 180, 180);
+	border-width: 1px;
+	border-radius: 5px;
+	color: #d3dae3;
+	padding: 2px;
+	background-color: #151a1e;
+}
+
+QPushButton:hover{
+	border-style: solid;
+	border-color: rgb(24, 255, 140);
+	border-width: 1px;
+	border-radius: 5px;
+	color: #d3dae3;
+	padding: 2px;
+	background-color: #1c1f1f;
+}
+QPushButton:pressed{
+	border-style: solid;
+	border-color: #050a0e;
+	border-width: 1px;
+	border-radius: 5px;
+	color: #d3dae3;
+	padding: 2px;
+	background-color: #2c2f2f;
+}</string>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::StyledPanel</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Raised</enum>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout"/>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
