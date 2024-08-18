@@ -110,7 +110,7 @@ for j=1:J
  objection_prosumer(j)=sum(Cost_op(j,:))+sum(Cost_ng(j,:))+sum(Cost_SL(j,:));
 end 
 
- ops=sdpsettings('verbose', 1, 'solver', 'gurobi','debug',1);
+ ops=sdpsettings('verbose', 1, 'solver', 'gurobi','debug',2);
 for j=1:J
 Result{j}=optimize(Cons_pro{j}, objection_prosumer(j)+100*pen_pro(j),ops);%
 if Result{j}.problem==0   
