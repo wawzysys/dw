@@ -1,7 +1,8 @@
 import shutil
 import sqlite3
 import time
-
+import os
+import matlab.engine
 import cv2
 import numpy as np
 from PyQt5 import QtWidgets, QtGui, QtCore, QtSql
@@ -10,6 +11,7 @@ from PyQt5.QtCore import Qt, QThread, pyqtSignal, QTimer
 from PyQt5.QtGui import QMouseEvent, QImage, QPixmap, QPainter, QColor, QBrush, QFont
 from PyQt5.QtWidgets import QWidget, QFileDialog
 from Ui_main import Ui_MainWindow
+from guding import a, b
 import sys
 import os
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
@@ -56,36 +58,62 @@ class myWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.listWidget.itemClicked.connect(self.on_item_clicked)
         self.listWidget_2.itemClicked.connect(self.on_item_clicked_2)
 
-    def on_item_clicked_2(self, item):
-        if item.text() == '系统传输容量':
-            self.show_example_drawing_3()
-            print('a')
-        elif item.text() == '新能源消纳率':
-            self.show_example_drawing_4()
-            print('b')
-
     def on_item_clicked(self, item):
         if item.text() == '负荷调控结果':
             self.show_example_drawing()
-            print('c')
+            print('a')
         elif item.text() == '节点边际电价':
             self.show_example_drawing2()
+            print('b')
+
+    def on_item_clicked_2(self, item):
+        if item.text() == '系统传输容量':
+            self.show_example_drawing_3()
+            print('c')
+        elif item.text() == '新能源消纳率':
+            self.show_example_drawing_4()
             print('d')
+        elif item.text() == '消纳率响应前后对比':
+            self.show_example_drawing5()
+            print('e')
 
     def pred_1(self):
+        current_dir = os.path.dirname(os.path.abspath(__file__))
+        #更改路径
+        relative_matlab_path = '../guizhou0714'
+        absolute_matlab_path = os.path.join(current_dir, relative_matlab_path)
+        eng = matlab.engine.start_matlab()
+        print("开始运行1")
+        eng.addpath(absolute_matlab_path, nargout=0)
+        function1 = 'main'
+        eng.main(function1, nargout=0)
         print("预留接口1")
 
     def pred_2(self):
+        current_dir = os.path.dirname(os.path.abspath(__file__))
+        #更改路径即可
+        relative_matlab_path = '../gzdw_desk-master/matlab_lib/code_shiji'
+        # C:\Users\19160\Desktop\dw\gzdw_desk-master\matlab_lib\code_shiji\key_line_xinyi.m
+        absolute_matlab_path = os.path.join(current_dir, relative_matlab_path)
+        eng = matlab.engine.start_matlab()
+        eng.addpath(absolute_matlab_path, nargout=0)
+        print("开始运行2")
+        #更改函数名
+        function2 = 'key_line_xinyi'
+        eng.run(function, nargout=0)
+        # eng.main(nargout=0)
         print("预留接口2")
 
     def show_img1(self):
         # 弹出文件选择框
+        print("show_img1")
         file_path, _ = QFileDialog.getOpenFileName(
             self, '选择图片', '', 'Image files (*.png *.jpg)')
         if file_path:
             self.show_image_in_label(file_path, self.label_image_1)
 
     def show_img2(self):
+        print("show_img2")
         # 弹出文件选择框
         file_path, _ = QFileDialog.getOpenFileName(
             self, '选择图片', '', 'Image files (*.png *.jpg)')
@@ -146,6 +174,7 @@ class myWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             target_path = os.path.join(target_dir, new_file_name)
             # 复制文件
             shutil.copy(file_path, target_path)
+        print("copy_file1")
 
     def copy_file2(self):
         # 弹出文件选择框
@@ -164,6 +193,7 @@ class myWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             target_path = os.path.join(target_dir, new_file_name)
             # 复制文件
             shutil.copy(file_path, target_path)
+        print("copy_file2")
 
     def show_example_drawing(self):
         # 创建一个折线系列并添加数据
@@ -315,6 +345,40 @@ class myWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.verticalLayout_20.addWidget(self.current_chart_view)
 
     def show_example_drawing_4(self):
+        # 创建一个柱状图系列并添加数据
+        set0 = QBarSet("检测值")
+        set0 << 2 << 4 << 3 << 4 << 1 << 6
+
+        series = QBarSeries()
+        series.append(set0)
+
+        # 创建图表对象，并添加系列
+        chart = QChart()
+        chart.addSeries(series)
+        chart.setTitle("示例柱状图")
+        chart.setTitleBrush(QBrush(QColor(0, 255, 0)))  # 设置标题文字颜色为绿色
+        chart.setBackgroundBrush(QBrush(QColor(0, 0, 0)))  # 设置背景为黑色
+
+        # 设置坐标轴
+        chart.createDefaultAxes()
+        chart.axisX().setTitleText("X坐标轴")
+        chart.axisX().setTitleBrush(QBrush(QColor(0, 255, 0)))  # 设置X轴标题文字颜色为绿色
+        chart.axisY().setTitleText("Y坐标轴")
+        chart.axisY().setTitleBrush(QBrush(QColor(0, 255, 0)))  # 设置Y轴标题文字颜色为绿色
+
+        # 设置图例
+        chart.legend().setFont(QFont("SansSerif", 10, QFont.Bold))
+        chart.legend().setLabelColor(QColor(0, 255, 0))  # 设置图例文字颜色为绿色
+        chart.legend().show()
+        if self.current_chart_view:
+            self.verticalLayout_9.removeWidget(self.current_chart_view)
+            self.current_chart_view.deleteLater()
+        # 创建图表视图，并将其设置为窗口的中心部件
+        self.current_chart_view = QChartView(chart)
+        self.current_chart_view.setRenderHint(QPainter.Antialiasing)
+        self.verticalLayout_21.addWidget(self.current_chart_view)
+
+    def show_example_drawing5(self):
         # 创建一个柱状图系列并添加数据
         set0 = QBarSet("检测值")
         set0 << 2 << 4 << 3 << 4 << 1 << 6
