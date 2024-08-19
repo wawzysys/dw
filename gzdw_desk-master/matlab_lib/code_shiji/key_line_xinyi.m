@@ -234,7 +234,7 @@ bus_r_labels = bus_name(bus_r);
 writecell({'节点编号', '消纳率'}, output_filename, 'Sheet', 'Figure4', 'Range', 'A1:B1');
 writematrix(PP1_data, output_filename, 'Sheet', 'Figure4', 'Range', 'A2');
 writecell({'节点名称'}, output_filename, 'Sheet', 'Figure4', 'Range', 'C1');
-writecell(bus_r_labels', output_filename, 'Sheet', 'Figure4', 'Range', 'C2');
+writecell(bus_r_labels, output_filename, 'Sheet', 'Figure4', 'Range', 'C2');  % 这里进行转置
 
 % Figure 5 数据
 SL_data = [1:branchnum; SL]';
@@ -248,7 +248,7 @@ writematrix(SLmax_data, output_filename, 'Sheet', 'Figure5_SLmax', 'Range', 'A2'
 writecell({'关键线路编号', '关键线路容量'}, output_filename, 'Sheet', 'Figure5_key_l', 'Range', 'A1:B1');
 writematrix(key_l_data, output_filename, 'Sheet', 'Figure5_key_l', 'Range', 'A2');
 writecell({'线路名称'}, output_filename, 'Sheet', 'Figure5_SL', 'Range', 'C1');
-writecell(branch_labels, output_filename, 'Sheet', 'Figure5_SL', 'Range', 'C2');
+writecell(branch_labels, output_filename, 'Sheet', 'Figure5_SL', 'Range', 'C2');  % 这里进行转置
 
 % Figure 6 数据（不同节点排序新能源消纳的提升）
 per_res_data = [1:busnum; per_res(2,:)]';
@@ -260,4 +260,6 @@ PPP_data = [1:res_num; PP1; PPP(key_Ln(1),:)]';
 writecell({'节点编号', '响应前消纳率', '响应后消纳率'}, output_filename, 'Sheet', 'Figure6_PP1_PPP', 'Range', 'A1:C1');
 writematrix(PPP_data, output_filename, 'Sheet', 'Figure6_PP1_PPP', 'Range', 'A2');
 writecell({'节点名称'}, output_filename, 'Sheet', 'Figure6_PP1_PPP', 'Range', 'D1');
-writecell(bus_r_labels', output_filename, 'Sheet', 'Figure6_PP1_PPP', 'Range', 'D2');
+writecell(bus_r_labels, output_filename, 'Sheet', 'Figure6_PP1_PPP', 'Range', 'D2');  % 这里进行转置
+
+
