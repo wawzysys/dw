@@ -224,3 +224,40 @@ char={'节点排序','节点名称'};
 writecell(char,'输出结果_兴义.xlsx','Sheet','负荷节点排序','Range','A1:B1');
 writematrix([1:length(key_Ln)]','输出结果_兴义.xlsx','Sheet','负荷节点排序','Range','A2'); 
 writecell(bus_name(key_Ln),'输出结果_兴义.xlsx','Sheet','负荷节点排序','Range','B2');
+
+% 保存绘图数据到Excel文件
+output_filename = 'plot_data.xlsx';
+
+% Figure 4 数据
+PP1_data = [1:res_num; PP1]';
+bus_r_labels = bus_name(bus_r);
+writecell({'节点编号', '消纳率'}, output_filename, 'Sheet', 'Figure4', 'Range', 'A1:B1');
+writematrix(PP1_data, output_filename, 'Sheet', 'Figure4', 'Range', 'A2');
+writecell({'节点名称'}, output_filename, 'Sheet', 'Figure4', 'Range', 'C1');
+writecell(bus_r_labels', output_filename, 'Sheet', 'Figure4', 'Range', 'C2');
+
+% Figure 5 数据
+SL_data = [1:branchnum; SL]';
+SLmax_data = [1:branchnum; SLmax]';
+key_l_data = [key_l; SL(key_l)]';
+branch_labels = branch_name;
+writecell({'线路编号', '传输容量'}, output_filename, 'Sheet', 'Figure5_SL', 'Range', 'A1:B1');
+writematrix(SL_data, output_filename, 'Sheet', 'Figure5_SL', 'Range', 'A2');
+writecell({'线路编号', '容量限值'}, output_filename, 'Sheet', 'Figure5_SLmax', 'Range', 'A1:B1');
+writematrix(SLmax_data, output_filename, 'Sheet', 'Figure5_SLmax', 'Range', 'A2');
+writecell({'关键线路编号', '关键线路容量'}, output_filename, 'Sheet', 'Figure5_key_l', 'Range', 'A1:B1');
+writematrix(key_l_data, output_filename, 'Sheet', 'Figure5_key_l', 'Range', 'A2');
+writecell({'线路名称'}, output_filename, 'Sheet', 'Figure5_SL', 'Range', 'C1');
+writecell(branch_labels, output_filename, 'Sheet', 'Figure5_SL', 'Range', 'C2');
+
+% Figure 6 数据（不同节点排序新能源消纳的提升）
+per_res_data = [1:busnum; per_res(2,:)]';
+writecell({'节点编号', '消纳提升'}, output_filename, 'Sheet', 'Figure6_per_res', 'Range', 'A1:B1');
+writematrix(per_res_data, output_filename, 'Sheet', 'Figure6_per_res', 'Range', 'A2');
+
+% Figure 6 数据（响应前后新能源消纳率对比）
+PPP_data = [1:res_num; PP1; PPP(key_Ln(1),:)]';
+writecell({'节点编号', '响应前消纳率', '响应后消纳率'}, output_filename, 'Sheet', 'Figure6_PP1_PPP', 'Range', 'A1:C1');
+writematrix(PPP_data, output_filename, 'Sheet', 'Figure6_PP1_PPP', 'Range', 'A2');
+writecell({'节点名称'}, output_filename, 'Sheet', 'Figure6_PP1_PPP', 'Range', 'D1');
+writecell(bus_r_labels', output_filename, 'Sheet', 'Figure6_PP1_PPP', 'Range', 'D2');
