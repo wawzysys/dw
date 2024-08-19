@@ -11,14 +11,14 @@ def picture_2():
     # 读取Excel文件
     file_path = r'C:\Users\19160\Desktop\dw\plot_data2.xlsx'
 
-    # Figure 4 数据
+    # Figure 3 数据
     figure4_data = pd.read_excel(file_path, sheet_name='Figure4')
     nodes_figure4 = figure4_data['节点编号']
     PP1 = figure4_data['消纳率']
     bus_r_labels_figure4 = figure4_data['节点名称']
     print(bus_r_labels_figure4)
 
-    # Figure 5 数据
+    # Figure 4 数据
     figure5_SL_data = pd.read_excel(file_path, sheet_name='Figure5_SL')
     figure5_SLmax_data = pd.read_excel(file_path, sheet_name='Figure5_SLmax')
     figure5_key_l_data = pd.read_excel(file_path, sheet_name='Figure5_key_l')
@@ -29,7 +29,7 @@ def picture_2():
     key_l_SL = figure5_key_l_data['关键线路容量']
     branch_labels = figure5_SL_data['线路名称']
 
-    # Figure 6 数据
+    # Figure 5 数据
     figure6_PP1_PPP_data = pd.read_excel(file_path,
                                          sheet_name='Figure6_PP1_PPP')
     nodes_figure6_PP1_PPP = figure6_PP1_PPP_data['节点编号']
@@ -37,7 +37,7 @@ def picture_2():
     PPP = figure6_PP1_PPP_data['响应后消纳率']
     bus_r_labels_figure6 = figure6_PP1_PPP_data['节点名称']
 
-    # 绘制 Figure 4: 新能源消纳率图
+    # 绘制 Figure 3: 新能源消纳率图
     plt.figure(figsize=(10, 6), facecolor='black')
     bars = plt.bar(nodes_figure4, PP1, color='blue', edgecolor='black')
     plt.xlabel('节点编号', fontsize=12, color='green')
@@ -70,10 +70,10 @@ def picture_2():
                facecolor='black',
                edgecolor='black',
                labelcolor='green')
-    plt.savefig('Figure4.png', dpi=300)
+    plt.savefig('Figure3.png', dpi=300)
     # plt.show()
 
-    # 绘制 Figure 5: 系统线路传输容量图
+    # 绘制 Figure 4: 系统线路传输容量图
     plt.figure(figsize=(10, 6), facecolor='black')
     plt.plot(nodes_figure5,
              SL,
@@ -106,10 +106,10 @@ def picture_2():
     plt.gca().set_facecolor('black')
     plt.tight_layout()
 
-    plt.savefig('Figure5.png', dpi=300)
+    plt.savefig('Figure4.png', dpi=300)
     # plt.show()
 
-    # 绘制 Figure 6: 响应前后新能源消纳率对比图
+    # 绘制 Figure 5: 响应前后新能源消纳率对比图
     plt.figure(figsize=(10, 6), facecolor='black')
     bar_width = 0.4
     index = nodes_figure6_PP1_PPP - 1
@@ -164,7 +164,7 @@ def picture_2():
                  fontsize=10,
                  color='green')
 
-    plt.savefig('Figure6.png', dpi=300)
+    plt.savefig('Figure5.png', dpi=300)
     # plt.show()
 
 
