@@ -22,6 +22,16 @@ plt.rcParams['font.sans-serif'] = ['SimHei']  # 指定默认字体为黑体
 plt.rcParams['axes.unicode_minus'] = False  # 解决保存图像时负号'-'显示为方块的问题
 
 
+class MatlabWorker(QThread):
+
+    def __init__(self, function):
+        super().__init__()
+        self.function = function
+
+    def run(self):
+        self.function()
+
+
 class myWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
     def __init__(self):
@@ -51,8 +61,8 @@ class myWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.btn_img_1.clicked.connect(self.show_img1)
         self.btn_img_2.clicked.connect(self.show_img2)
         #预留接口
-        self.btn_predict_1.clicked.connect(self.pred_1)
-        self.btn_predict_2.clicked.connect(self.pred_2)
+        self.btn_predict_1.clicked.connect(self.run_pred_1)
+        self.btn_predict_2.clicked.connect(self.run_pred_2)
 
         # 连接itemClicked信号到槽函数
         self.listWidget.itemClicked.connect(self.on_item_clicked)
@@ -85,8 +95,9 @@ class myWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         eng = matlab.engine.start_matlab()
         print("开始运行1")
         eng.addpath(absolute_matlab_path, nargout=0)
+        #执行脚本
         function1 = 'main'
-        eng.main(function1, nargout=0)
+        eng.run(function1, nargout=0)
         print("预留接口1")
 
     def pred_2(self):
@@ -98,11 +109,20 @@ class myWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         eng = matlab.engine.start_matlab()
         eng.addpath(absolute_matlab_path, nargout=0)
         print("开始运行2")
-        #更改函数名
+        #更改脚本名字
         function2 = 'key_line_xinyi'
-        eng.run(function, nargout=0)
+        # 执行脚本
+        eng.run(function2, nargout=0)
         # eng.main(nargout=0)
         print("预留接口2")
+
+    def run_pred_1(self):
+        self.thread_1 = MatlabWorker(self.pred_1)
+        self.thread_1.start()
+
+    def run_pred_2(self):
+        self.thread_2 = MatlabWorker(self.pred_2)
+        self.thread_2.start()
 
     def show_img1(self):
         # 弹出文件选择框
