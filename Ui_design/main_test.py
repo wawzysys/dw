@@ -21,6 +21,8 @@ from matplotlib.figure import Figure
 import matplotlib.pyplot as plt
 from PyQt5.QtWidgets import QLabel, QVBoxLayout
 import logging
+from figure1 import figure1
+from figure2 import figure2
 
 plt.rcParams['font.sans-serif'] = ['SimHei']  # 指定默认字体为黑体
 plt.rcParams['axes.unicode_minus'] = False  # 解决保存图像时负号'-'显示为方块的问题
@@ -221,106 +223,16 @@ class myWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         print("copy_file2")
 
     def show_example_drawing(self):
-        # 创建一个折线系列并添加数据
-        series = QLineSeries()
-        series.append(0, 6.1)
-        series.append(1, 6.5)
-        series.append(2, 6.3)
-        series.append(3, 6.2)
-        series.append(4, 6.1)
-        series.append(5, 6.4)
-        series.append(6, 6.3)
-        series.append(7, 6.2)
-        series.append(8, 6.5)
-        series.append(9, 6.8)
-        series.setColor(QColor(255, 0, 0))
-        #
-        series1 = QLineSeries()
-        series1.append(0, 5.6)
-        series1.append(1, 6.8)
-        series1.append(2, 5.7)
-        series1.append(3, 6.3)
-        series1.append(4, 6.1)
-        series1.append(5, 5.9)
-        series1.append(6, 6.2)
-        series1.append(7, 6.8)
-        series1.append(8, 6.4)
-        series1.append(9, 6.0)
-        series1.setColor(QColor(0, 0, 255))
 
-        # 创建图表对象，并添加系列
-        chart = QChart()
-        chart.setBackgroundBrush(QBrush(QColor(0, 0, 0)))  # 设置背景为黑色
-        chart.legend().setFont(QFont("SansSerif", 10, QFont.Bold))
-        chart.legend().setLabelColor(QColor(0, 255, 0))  # 设置图例文字颜色为绿色
-        chart.setTitle("示例动态图形")
-        chart.setTitleBrush(QBrush(QColor(0, 255, 0)))  # 设置标题文字颜色为绿色
-        chart.legend().show()
-        chart.addSeries(series)
-        chart.addSeries(series1)
-        chart.createDefaultAxes()
-        # 设置坐标轴颜色（这里以X轴为例）
-        chart.axisX().setTitleText("X坐标轴")
-        chart.axisX().setTitleBrush(QBrush(QColor(0, 255, 0)))  # 设置X轴标题文字颜色为绿色
-        chart.axisX().setGridLineVisible(True)
-        chart.axisX().setGridLineColor(QColor(0, 255, 0))  # 设置X轴网格线颜色为绿色（可选）
-        chart.axisY().setTitleText("Y坐标轴")
-        chart.axisY().setTitleBrush(QBrush(QColor(0, 255, 0)))  # 设置Y轴标题文字颜色为绿色
-        chart.axisY().setGridLineVisible(True)
-        chart.axisY().setGridLineColor(QColor(0, 255, 0))  # 设置Y轴网格线颜色为绿色（可选）
-        # 创建图表视图，并将其设置为窗口的中心部件
-        # 创建或更新图表视图
-        if self.current_chart_view:
-            self.verticalLayout_9.removeWidget(self.current_chart_view)
-            self.current_chart_view.deleteLater()
-        # 删除旧视图释放资源
-        self.current_chart_view = QChartView(chart)
-        self.current_chart_view.setRenderHint(QPainter.Antialiasing)
-        self.verticalLayout_9.addWidget(self.current_chart_view)
-
-    def show_example_drawing2(self):
-        # 创建一个柱状图系列并添加数据
-        set0 = QBarSet("检测值")
-        set0 << 2 << 4 << 3 << 4 << 1 << 6
-
-        series = QBarSeries()
-        series.append(set0)
-
-        # 创建图表对象，并添加系列
-        chart = QChart()
-        chart.addSeries(series)
-        chart.setTitle("示例柱状图")
-        chart.setTitleBrush(QBrush(QColor(0, 255, 0)))  # 设置标题文字颜色为绿色
-        chart.setBackgroundBrush(QBrush(QColor(0, 0, 0)))  # 设置背景为黑色
-
-        # 设置坐标轴
-        chart.createDefaultAxes()
-        chart.axisX().setTitleText("X坐标轴")
-        chart.axisX().setTitleBrush(QBrush(QColor(0, 255, 0)))  # 设置X轴标题文字颜色为绿色
-        chart.axisY().setTitleText("Y坐标轴")
-        chart.axisY().setTitleBrush(QBrush(QColor(0, 255, 0)))  # 设置Y轴标题文字颜色为绿色
-
-        # 设置图例
-        chart.legend().setFont(QFont("SansSerif", 10, QFont.Bold))
-        chart.legend().setLabelColor(QColor(0, 255, 0))  # 设置图例文字颜色为绿色
-        chart.legend().show()
-        if self.current_chart_view:
-            self.verticalLayout_9.removeWidget(self.current_chart_view)
-            self.current_chart_view.deleteLater()
-        # 创建图表视图，并将其设置为窗口的中心部件
-        self.current_chart_view = QChartView(chart)
-        self.current_chart_view.setRenderHint(QPainter.Antialiasing)
-        self.verticalLayout_10.addWidget(self.current_chart_view)
-
-    def show_example_drawing_3(self):
-
-        # 使用图片
         print("开始创建图表对象")
         chart = QChart()
 
         # 加载图片使用 OpenCV
         print("正在加载图片")
-        img = cv2.imread(r"C:\Users\19160\Desktop\dw\Figure4.png")
+        file_path = r"C:\Users\19160\Desktop\dw\Figure1.png"
+        if not os.path.exists(file_path):
+            figure1()
+        img = cv2.imread(file_path)
         if img is None:
             print("加载图片失败，请检查路径")
             return
@@ -348,143 +260,315 @@ class myWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         chart.setBackgroundBrush(QBrush(QPixmap.fromImage(q_img)))
         print("设置图表背景")
 
-        # 创建图表视图，并将其设置为窗口的中心部件
-        chart_view = QChartView(chart)
-        chart_view.setRenderHint(QPainter.Antialiasing)
-
-        # 设置 chart_view 的固定大小为 640x480
-        chart_view.setFixedSize(target_width, target_height)
-
-        # 添加图表视图到布局
-        if hasattr(self, 'verticalLayout_20'):
-            print("找到布局 verticalLayout_20，添加视图")
-            self.verticalLayout_20.addWidget(chart_view)
-            self.verticalLayout_20.update()  # 强制刷新布局
-            self.repaint()  # 刷新窗口，确保布局已经完成
-        else:
-            print("未找到 verticalLayout_20，确保您的窗口中有这个布局。")
-
-        # 如果存在旧的视图，则删除
-        if hasattr(self, 'current_chart_view') and self.current_chart_view:
-            print("删除旧的图表视图")
-            self.current_chart_view.deleteLater()
-
-        # 更新当前视图
-        self.current_chart_view = chart_view
-        print("图表视图已更新")
-        print(
-            f"图表视图尺寸: {self.current_chart_view.size().width()} x {self.current_chart_view.size().height()}"
-        )
-
-        # file_path = r'C:\Users\19160\Desktop\dw\plot_data2.xlsx'
-        # if os.path.exists(file_path):
-
-        #     # 加载 Figure 3 数据
-        #     file_path = r'C:\Users\19160\Desktop\dw\plot_data2.xlsx'
-        #     figure4_data = pd.read_excel(file_path, sheet_name='Figure4')
-        #     nodes_figure4 = figure4_data['节点编号']
-        #     PP1 = figure4_data['消纳率']
-        #     bus_r_labels_figure4 = figure4_data['节点名称']
-
-        #     # 创建 QBarSet 并添加数据
-        #     bar_set = QBarSet("消纳率")
-        #     bar_set.append(PP1.tolist())
-
-        #     # 创建 QBarSeries 并将 QBarSet 添加进去
-        #     bar_series = QBarSeries()
-        #     bar_series.append(bar_set)
-        #     bar_series.setBarWidth(0.9)
-        #     bar_set.setColor(QColor("blue"))
-        #     bar_set.setBorderColor(QColor("black"))
-
-        #     # 创建图表对象
-        #     chart = QChart()
-        #     chart.addSeries(bar_series)
-        #     chart.setTitle("新能源消纳率")
-        #     chart.setTitleBrush(QBrush(QColor(0, 255, 0)))  # 设置标题文字颜色为绿色
-        #     chart.setBackgroundBrush(QBrush(QColor(0, 0, 0)))  # 设置背景为黑色
-        #     chart.legend().setVisible(False)  # 隐藏图例（如果只显示一组数据）
-
-        #     # 设置 X 轴
-        #     axisX = QCategoryAxis()
-        #     for i, label in enumerate(bus_r_labels_figure4):
-        #         axisX.append(label, nodes_figure4[i])
-        #     axisX.setLabelsAngle(45)
-        #     axisX.setTitleText("节点编号")
-        #     axisX.setTitleBrush(QColor("green"))
-        #     axisX.setLabelsBrush(QColor("green"))
-        #     chart.addAxis(axisX, Qt.AlignBottom)
-        #     bar_series.attachAxis(axisX)
-
-        #     # 设置 Y 轴
-        #     axisY = QValueAxis()
-        #     axisY.setTitleText("消纳率/%")
-        #     axisY.setTitleBrush(QColor("green"))
-        #     axisY.setLabelsBrush(QColor("green"))
-        #     axisY.setRange(0, max(PP1) + 5)
-        #     chart.addAxis(axisY, Qt.AlignLeft)
-        #     bar_series.attachAxis(axisY)
+        # # 检查是否已存在图表视图
+        # if self.current_chart_view is None:
+        #     self.current_chart_view = QChartView(chart)
+        #     self.verticalLayout_9.addWidget(self.current_chart_view)
         # else:
-        #     print("文件不存在，采用示例图片")
-        #     # 创建一个折线系列并添加数据
-        #     series = QLineSeries()
-        #     series.append(0, 6.1)
-        #     series.append(1, 6.5)
-        #     series.append(2, 6.3)
-        #     series.append(3, 6.2)
-        #     series.append(4, 6.1)
-        #     series.append(5, 6.4)
-        #     series.append(6, 6.3)
-        #     series.append(7, 6.2)
-        #     series.append(8, 6.5)
-        #     series.append(9, 6.8)
-        #     series.setColor(QColor(255, 0, 0))
-        #     #
-        #     series1 = QLineSeries()
-        #     series1.append(0, 5.6)
-        #     series1.append(1, 6.8)
-        #     series1.append(2, 5.7)
-        #     series1.append(3, 6.3)
-        #     series1.append(4, 6.1)
-        #     series1.append(5, 5.9)
-        #     series1.append(6, 6.2)
-        #     series1.append(7, 6.8)
-        #     series1.append(8, 6.4)
-        #     series1.append(9, 6.0)
-        #     series1.setColor(QColor(0, 0, 255))
+        #     self.current_chart_view.setChart(chart)
 
-        #     # 创建图表对象，并添加系列
-        #     chart = QChart()
-        #     chart.setBackgroundBrush(QBrush(QColor(0, 0, 0)))  # 设置背景为黑色
-        #     chart.legend().setFont(QFont("SansSerif", 10, QFont.Bold))
-        #     chart.legend().setLabelColor(QColor(0, 255, 0))  # 设置图例文字颜色为绿色
-        #     chart.setTitle("示例动态图形")
-        #     chart.setTitleBrush(QBrush(QColor(0, 255, 0)))  # 设置标题文字颜色为绿色
-        #     chart.legend().show()
-        #     chart.addSeries(series)
-        #     chart.addSeries(series1)
-        #     chart.createDefaultAxes()
-        #     # 设置坐标轴颜色（这里以X轴为例）
-        #     chart.axisX().setTitleText("X坐标轴")
-        #     chart.axisX().setTitleBrush(QBrush(QColor(0, 255,
-        #                                               0)))  # 设置X轴标题文字颜色为绿色
-        #     chart.axisX().setGridLineVisible(True)
-        #     chart.axisX().setGridLineColor(QColor(0, 255,
-        #                                           0))  # 设置X轴网格线颜色为绿色（可选）
-        #     chart.axisY().setTitleText("Y坐标轴")
-        #     chart.axisY().setTitleBrush(QBrush(QColor(0, 255,
-        #                                               0)))  # 设置Y轴标题文字颜色为绿色
-        #     chart.axisY().setGridLineVisible(True)
-        #     chart.axisY().setGridLineColor(QColor(0, 255,
-        #                                           0))  # 设置Y轴网格线颜色为绿色（可选）
+        # self.current_chart_view.setRenderHint(QPainter.Antialiasing)
+        # self.current_chart_view.setFixedSize(target_width, target_height)
 
-        # 创建图表视图，并将其设置为窗口的中心部件
+        if self.current_chart_view:
+            self.verticalLayout_9.removeWidget(self.current_chart_view)
+            self.current_chart_view.deleteLater()
+        self.current_chart_view = QChartView(chart)
+        self.current_chart_view.setRenderHint(QPainter.Antialiasing)
+        self.current_chart_view.setFixedSize(target_width, target_height)
+        self.verticalLayout_9.addWidget(self.current_chart_view)
+
+    def show_example_drawing2(self):
+        print("开始创建图表对象")
+        chart = QChart()
+
+        # 加载图片使用 OpenCV
+        print("正在加载图片")
+        file_path = r"C:\Users\19160\Desktop\dw\Figure2.png"
+        if not os.path.exists(file_path):
+            figure2()
+        img = cv2.imread(r"C:\Users\19160\Desktop\dw\Figure2.png")
+        if img is None:
+            print("加载图片失败，请检查路径")
+            return
+        else:
+            print(f"图片加载成功，图片尺寸: {img.shape[1]} x {img.shape[0]}")
+
+        # 将图片缩放到640x480
+        target_width = 640
+        target_height = 480
+        print(f"正在缩放图片到 {target_width} x {target_height}")
+        resized_img = cv2.resize(img, (target_width, target_height),
+                                 interpolation=cv2.INTER_AREA)
+        print(f"缩放后的图片尺寸: {resized_img.shape[1]} x {resized_img.shape[0]}")
+
+        # 将颜色从BGR转换为RGB
+        resized_img_rgb = cv2.cvtColor(resized_img, cv2.COLOR_BGR2RGB)
+
+        # 将 OpenCV 图像转换为 QImage
+        height, width, channel = resized_img_rgb.shape
+        bytes_per_line = 3 * width
+        q_img = QImage(resized_img_rgb.data, width, height, bytes_per_line,
+                       QImage.Format_RGB888)
+
+        # 设置图表背景为缩放后的图片
+        chart.setBackgroundBrush(QBrush(QPixmap.fromImage(q_img)))
+        print("设置图表背景")
+
+        # # 检查是否已存在图表视图
+        # if self.current_chart_view is None:
+        #     self.current_chart_view = QChartView(chart)
+        #     self.verticalLayout_10.addWidget(self.current_chart_view)
+        # else:
+        #     self.current_chart_view.setChart(chart)
+
+        # self.current_chart_view.setRenderHint(QPainter.Antialiasing)
+        # self.current_chart_view.setFixedSize(target_width, target_height)
+        if self.current_chart_view:
+            self.verticalLayout_10.removeWidget(self.current_chart_view)
+            self.current_chart_view.deleteLater()
+        self.current_chart_view = QChartView(chart)
+        self.current_chart_view.setRenderHint(QPainter.Antialiasing)
+        self.current_chart_view.setFixedSize(target_width, target_height)
+        self.verticalLayout_10.addWidget(self.current_chart_view)
+
+        # # 添加图表视图到布局
+        # if hasattr(self, 'verticalLayout_9'):
+        #     print("找到布局 verticalLayout_9，添加视图")
+        #     self.verticalLayout_9.addWidget(chart_view)
+        #     self.verticalLayout_9.update()  # 强制刷新布局
+        #     self.repaint()  # 刷新窗口，确保布局已经完成
+        # else:
+        #     print("未找到 verticalLayout_9，确保您的窗口中有这个布局。")
+
+        # # 如果存在旧的视图，则删除
+        # if hasattr(self, 'current_chart_view') and self.current_chart_view:
+        #     print("删除旧的图表视图")
+        #     self.current_chart_view.deleteLater()
+
+        # # 更新当前视图
+        # self.current_chart_view = chart_view
+        # print("图表视图已更新")
+        # print(
+        #     f"图表视图尺寸: {self.current_chart_view.size().width()} x {self.current_chart_view.size().height()}"
+        # )
+
+        # 创建一个柱状图系列并添加数据
+        # set0 = QBarSet("检测值")
+        # set0 << 2 << 4 << 3 << 4 << 1 << 6
+
+        # series = QBarSeries()
+        # series.append(set0)
+
+        # # 创建图表对象，并添加系列
+        # chart = QChart()
+        # chart.addSeries(series)
+        # chart.setTitle("示例柱状图")
+        # chart.setTitleBrush(QBrush(QColor(0, 255, 0)))  # 设置标题文字颜色为绿色
+        # chart.setBackgroundBrush(QBrush(QColor(0, 0, 0)))  # 设置背景为黑色
+
+        # # 设置坐标轴
+        # chart.createDefaultAxes()
+        # chart.axisX().setTitleText("X坐标轴")
+        # chart.axisX().setTitleBrush(QBrush(QColor(0, 255, 0)))  # 设置X轴标题文字颜色为绿色
+        # chart.axisY().setTitleText("Y坐标轴")
+        # chart.axisY().setTitleBrush(QBrush(QColor(0, 255, 0)))  # 设置Y轴标题文字颜色为绿色
+
+        # # 设置图例
+        # chart.legend().setFont(QFont("SansSerif", 10, QFont.Bold))
+        # chart.legend().setLabelColor(QColor(0, 255, 0))  # 设置图例文字颜色为绿色
+        # chart.legend().show()
         # if self.current_chart_view:
         #     self.verticalLayout_9.removeWidget(self.current_chart_view)
         #     self.current_chart_view.deleteLater()
+        # # 创建图表视图，并将其设置为窗口的中心部件
         # self.current_chart_view = QChartView(chart)
         # self.current_chart_view.setRenderHint(QPainter.Antialiasing)
-        # self.verticalLayout_20.addWidget(self.current_chart_view)
+        # self.verticalLayout_10.addWidget(self.current_chart_view)
+
+    def show_example_drawing_3(self):
+
+        # # 使用图片
+        # print("开始创建图表对象")
+        # chart = QChart()
+
+        # # 加载图片使用 OpenCV
+        # print("正在加载图片")
+        # img = cv2.imread(r"C:\Users\19160\Desktop\dw\Figure4.png")
+        # if img is None:
+        #     print("加载图片失败，请检查路径")
+        #     return
+        # else:
+        #     print(f"图片加载成功，图片尺寸: {img.shape[1]} x {img.shape[0]}")
+
+        # # 将图片缩放到640x480
+        # target_width = 640
+        # target_height = 480
+        # print(f"正在缩放图片到 {target_width} x {target_height}")
+        # resized_img = cv2.resize(img, (target_width, target_height),
+        #                          interpolation=cv2.INTER_AREA)
+        # print(f"缩放后的图片尺寸: {resized_img.shape[1]} x {resized_img.shape[0]}")
+
+        # # 将颜色从BGR转换为RGB
+        # resized_img_rgb = cv2.cvtColor(resized_img, cv2.COLOR_BGR2RGB)
+
+        # # 将 OpenCV 图像转换为 QImage
+        # height, width, channel = resized_img_rgb.shape
+        # bytes_per_line = 3 * width
+        # q_img = QImage(resized_img_rgb.data, width, height, bytes_per_line,
+        #                QImage.Format_RGB888)
+
+        # # 设置图表背景为缩放后的图片
+        # chart.setBackgroundBrush(QBrush(QPixmap.fromImage(q_img)))
+        # print("设置图表背景")
+
+        # # 创建图表视图，并将其设置为窗口的中心部件
+        # chart_view = QChartView(chart)
+        # chart_view.setRenderHint(QPainter.Antialiasing)
+
+        # # 设置 chart_view 的固定大小为 640x480
+        # chart_view.setFixedSize(target_width, target_height)
+
+        # # 添加图表视图到布局
+        # if hasattr(self, 'verticalLayout_20'):
+        #     print("找到布局 verticalLayout_20，添加视图")
+        #     self.verticalLayout_20.addWidget(chart_view)
+        #     self.verticalLayout_20.update()  # 强制刷新布局
+        #     self.repaint()  # 刷新窗口，确保布局已经完成
+        # else:
+        #     print("未找到 verticalLayout_20，确保您的窗口中有这个布局。")
+
+        # # 如果存在旧的视图，则删除
+        # if hasattr(self, 'current_chart_view') and self.current_chart_view:
+        #     print("删除旧的图表视图")
+        #     self.current_chart_view.deleteLater()
+
+        # # 更新当前视图
+        # self.current_chart_view = chart_view
+        # print("图表视图已更新")
+        # print(
+        #     f"图表视图尺寸: {self.current_chart_view.size().width()} x {self.current_chart_view.size().height()}"
+        # )
+
+        file_path = r'C:\Users\19160\Desktop\dw\plot_data2.xlsx'
+        if os.path.exists(file_path):
+            font = QFont("SimSun", 12)  # 可以根据需要调整字体和大小
+            font.setBold(True)  # 设置字体为加粗
+            # 加载 Figure 3 数据
+            file_path = r'C:\Users\19160\Desktop\dw\plot_data2.xlsx'
+            figure4_data = pd.read_excel(file_path, sheet_name='Figure4')
+            nodes_figure4 = figure4_data['节点编号']
+            PP1 = figure4_data['消纳率']
+            bus_r_labels_figure4 = figure4_data['节点名称']
+
+            # 创建 QBarSet 并添加数据
+            bar_set = QBarSet("消纳率")
+            bar_set.append(PP1.tolist())
+
+            # 创建 QBarSeries 并将 QBarSet 添加进去
+            bar_series = QBarSeries()
+            bar_series.append(bar_set)
+            bar_series.setBarWidth(0.9)
+            bar_set.setColor(QColor(55, 161, 109))
+            bar_set.setBorderColor(QColor("black"))
+
+            # 创建图表对象
+            chart = QChart()
+            chart.addSeries(bar_series)
+            chart.setTitle("新能源消纳率")
+            chart.setTitleFont(font)
+            chart.setTitleBrush(QBrush(QColor('white')))  # 设置标题文字颜色为白色
+            chart.setBackgroundBrush(QBrush(QColor(0, 0, 0)))  # 设置背景为黑色
+            chart.legend().setVisible(False)  # 隐藏图例（如果只显示一组数据）
+
+            # 设置 X 轴
+            axisX = QCategoryAxis()
+            # 计算步长，确保不会除以零
+            label_count = len(bus_r_labels_figure4)
+            step = max(1, label_count // 10)  # 至少为1，避免除以0
+
+            for i, label in enumerate(bus_r_labels_figure4):
+                if i % step == 0:  # 每隔step个标签显示一次
+                    axisX.append(label, nodes_figure4[i])
+
+            axisX.setLabelsAngle(60)  # 增加标签角度以减少重叠
+            axisX.setTitleText("节点编号")
+            axisX.setTitleFont(font)
+            axisX.setTitleBrush(QColor('white'))
+            axisX.setLabelsBrush(QColor("white"))
+            chart.addAxis(axisX, Qt.AlignBottom)
+            bar_series.attachAxis(axisX)
+
+            # 设置 Y 轴
+            axisY = QValueAxis()
+            axisY.setTitleText("消纳率/%")
+            axisY.setTitleFont(font)
+            axisY.setTitleBrush(QColor("white"))
+            axisY.setLabelsBrush(QColor("white"))
+            axisY.setRange(0, max(PP1) + 5)
+            chart.addAxis(axisY, Qt.AlignLeft)
+            bar_series.attachAxis(axisY)
+        else:
+            print("文件不存在，采用示例图片")
+            # 创建一个折线系列并添加数据
+            series = QLineSeries()
+            series.append(0, 6.1)
+            series.append(1, 6.5)
+            series.append(2, 6.3)
+            series.append(3, 6.2)
+            series.append(4, 6.1)
+            series.append(5, 6.4)
+            series.append(6, 6.3)
+            series.append(7, 6.2)
+            series.append(8, 6.5)
+            series.append(9, 6.8)
+            series.setColor(QColor(255, 0, 0))
+            #
+            series1 = QLineSeries()
+            series1.append(0, 5.6)
+            series1.append(1, 6.8)
+            series1.append(2, 5.7)
+            series1.append(3, 6.3)
+            series1.append(4, 6.1)
+            series1.append(5, 5.9)
+            series1.append(6, 6.2)
+            series1.append(7, 6.8)
+            series1.append(8, 6.4)
+            series1.append(9, 6.0)
+            series1.setColor(QColor(0, 0, 255))
+
+            # 创建图表对象，并添加系列
+            chart = QChart()
+            chart.setBackgroundBrush(QBrush(QColor(0, 0, 0)))  # 设置背景为黑色
+            chart.legend().setFont(QFont("SansSerif", 10, QFont.Bold))
+            chart.legend().setLabelColor(QColor(0, 255, 0))  # 设置图例文字颜色为绿色
+            chart.setTitle("示例动态图形")
+            chart.setTitleBrush(QBrush(QColor(0, 255, 0)))  # 设置标题文字颜色为绿色
+            chart.legend().show()
+            chart.addSeries(series)
+            chart.addSeries(series1)
+            chart.createDefaultAxes()
+            # 设置坐标轴颜色（这里以X轴为例）
+            chart.axisX().setTitleText("X坐标轴")
+            chart.axisX().setTitleBrush(QBrush(QColor(0, 255,
+                                                      0)))  # 设置X轴标题文字颜色为绿色
+            chart.axisX().setGridLineVisible(True)
+            chart.axisX().setGridLineColor(QColor(0, 255,
+                                                  0))  # 设置X轴网格线颜色为绿色（可选）
+            chart.axisY().setTitleText("Y坐标轴")
+            chart.axisY().setTitleBrush(QBrush(QColor(0, 255,
+                                                      0)))  # 设置Y轴标题文字颜色为绿色
+            chart.axisY().setGridLineVisible(True)
+            chart.axisY().setGridLineColor(QColor(0, 255,
+                                                  0))  # 设置Y轴网格线颜色为绿色（可选）
+
+        # 创建图表视图，并将其设置为窗口的中心部件
+        if self.current_chart_view:
+            self.verticalLayout_20.removeWidget(self.current_chart_view)
+            self.current_chart_view.deleteLater()
+        self.current_chart_view = QChartView(chart)
+        self.current_chart_view.setRenderHint(QPainter.Antialiasing)
+        self.verticalLayout_20.addWidget(self.current_chart_view)
 
     def show_example_drawing_4(self):
         # 种类1
@@ -706,7 +790,7 @@ class myWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         # series.append(set0)
 
         if self.current_chart_view:
-            self.verticalLayout_9.removeWidget(self.current_chart_view)
+            self.verticalLayout_21.removeWidget(self.current_chart_view)
             self.current_chart_view.deleteLater()
         # 创建图表视图，并将其设置为窗口的中心部件
         self.current_chart_view = QChartView(chart)
@@ -839,7 +923,7 @@ class myWindow(QtWidgets.QMainWindow, Ui_MainWindow):
                                                   0))  # 设置Y轴网格线颜色为绿色（可选）
 
         if self.current_chart_view:
-            self.verticalLayout_9.removeWidget(self.current_chart_view)
+            self.verticalLayout_21.removeWidget(self.current_chart_view)
             self.current_chart_view.deleteLater()
         # 创建图表视图，并将其设置为窗口的中心部件
         self.current_chart_view = QChartView(chart)
