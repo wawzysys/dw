@@ -65,7 +65,7 @@ def figure1():
     ax.set_xlabel('小时(h)')
     ax.set_ylabel('节点')
     ax.set_zlabel('负荷调控结果 (MWh)')
-    ax.set_title('负荷调控结果热力图', color='white')  # 将标题颜色设置为白色
+    ax.set_title('银山负荷调控结果热力图', color='white')  # 将标题颜色设置为白色
 
     # 调整视角
     ax.view_init(elev=30, azim=45)  # 提高视角和旋转角度
@@ -80,4 +80,4 @@ def figure1():
 
 # 显示图形
 # plt.show()
-# figure1()
+figure1()

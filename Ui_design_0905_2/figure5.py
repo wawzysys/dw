@@ -9,6 +9,7 @@ def figure5():
     
     # 读取Excel文件
     file_path = r'C:\Users\19160\Desktop\dw\plot_data2.xlsx'
+    # file_path = r'C:\Users\19160\Desktop\dw\plot_data.xlsx'
     
     # 读取数据
     figure6_PP1_PPP_data = pd.read_excel(file_path, sheet_name='Figure6_PP1_PPP')
@@ -26,7 +27,7 @@ def figure5():
     
     plt.xlabel('节点编号', fontsize=12, color='white')
     plt.ylabel('消纳率/%', fontsize=12, color='white')
-    plt.title('兴义新能源消纳率前后对比', fontsize=14, color='white')
+    plt.title('银山新能源消纳率前后对比', fontsize=14, color='white')
     plt.xticks(index + bar_width / 2, bus_r_labels_figure6, rotation=45, fontsize=10, color='white')
     plt.yticks(fontsize=10, color='white')
     plt.legend(fontsize=10, loc='upper left', facecolor='black', edgecolor='black', labelcolor='white')

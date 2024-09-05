@@ -1,34 +1,25 @@
 % Define the input data matrix, where each row is [from_node, to_node, R, X]
-node_num=17;
+node_num=16;
 data = [
-    1, 2, 2.55, 5.925;
-    1, 2, 2.55, 5.925;
-    1, 3, 3.9832, 20.76243;
-    1, 3, 3.47688, 16.3308;
-    1, 4, 1.4943, 3.47205;
-    1, 5, 0.598, 1.7848;
-    1, 5, 0.598, 1.7848;
-    1, 6, 1.2922, 3.85672;
-    1, 6, 1.4209, 4.24084;
-    1, 7, 2.6, 7.76;
-    1, 8, 1.0166, 2.3621;
-    1, 8, 0.6766, 1.5721;
-    1, 10, 1.3893, 6.5255;
-    1, 10, 1.42032, 6.6712;
-    1, 12, 6.2577, 14.53995;
-    1, 16, 0.51, 1.185;
-    3, 4, 2.3681, 5.50235;
-    3, 13, 0.91, 2.716;
-    3, 13, 1.5912, 4.74912;
-    3, 15, 1.911, 5.7036;
-    7, 10, 3.519, 8.1765;
-    8, 9, 4.25, 9.875;
-    8, 17, 0.51, 1.185;
-    10, 11, 1.5, 2.3621;
-    13, 14, 1.5, 2.3621;
-    13, 15, 1.5, 2.3621;
-    14, 15, 1.5, 2.3621;
-    16, 17, 1.5, 2.3621;
+1	2	2.57	7.88
+2	4	3.46	10.59
+2	8	0.70	2.14
+3	8	1.91	5.84
+3	4	1.62	4.97
+4	6	4.13	15.54
+4	5	0.93	2.86
+4	7	2.34	15.01
+4	7	2.57	16.46
+5	7	4.07	12.47
+5	9	4.93	11.89
+9	10	3.16	7.63
+10	11	0.83	2.53
+11	12	2.62	8.02
+4	13	1.97	6.02
+4	14	1.57	4.81
+4	16	2.26	6.91
+4	16	1.12	7.20
+5	15	3.28	10.03
 ];
 
 % Extract unique pairs of nodes
@@ -59,23 +50,23 @@ branch_data(:, 4)=branch_data(:, 4)/242;
 % disp(result);
 % Define maximum power loads (Active and Reactive) for each node from the given data
 max_loads = [
-    181.0, 36.20;
-    33.3, 6.66;
-    100.4, 20.08;
-    35.80, 7.16;
-    68.00, 13.60;
-    80.80, 16.16;
-    0.00, 0.00;
-    10.9, 2.18;
-    0.00, 0.00;
-    80.0, 16.00;
-    0.00, 0.00;
-    25.00, 5.00;
-    63.20, 12.64;
-    25.60, 5.12;
-    0.00, 0.00;
-    35.75, 7.15;
-    40.00, 8.00;
+    24.1	7.9
+    53.2	17.5
+    18.7	6.1
+    69.6	22.9
+    27.2	8.9
+    60.0	19.7
+    20.0	6.6
+    0.0	0.0
+    0.0	0.0
+    23.2	7.6
+    0.0	0.0
+    0.0	0.0
+    0.0	0.0
+    0.0	0.0
+    0.0	0.0
+    20.0	6.6
+
 ];
 
 % Define the daily load profile (24 hours) as a percentage
@@ -102,12 +93,12 @@ hourly_loads = permute(hourly_loads, [2, 1, 3]);
 
 
 % Initialize the matrix with node numbers and zero capacities
-nodes = (1:17)'; % Node numbers from 1 to 17
-PV_capacities = zeros(17, 1); % Zero capacities initially
+nodes = (1:16)'; % Node numbers from 1 to 17
+PV_capacities = zeros(16, 1); % Zero capacities initially
 
 % Define the nodes with photovoltaic systems and their capacities
-pv_nodes = [7, 9, 11, 15, 15]; % Nodes
-pv_capacities = [50, 120, 200, 40, 0]; % Corresponding capacities
+pv_nodes = [11,12,13,14,15]; % Nodes
+pv_capacities = [ 50, 50, 120, 100,100]; % Corresponding capacities
 
 % Add capacities to the nodes
 for i = 1:length(pv_nodes)
@@ -115,10 +106,20 @@ for i = 1:length(pv_nodes)
     PV_capacities(node_index) = PV_capacities(node_index) + pv_capacities(i);
 end
 
-WT_capacities = zeros(17, 1);
-wt_nodes = [15]; % Nodes
-wt_capacities = [15]; % Corresponding capacities
+WT_capacities = zeros(16, 1);
+wt_nodes = [8]; % Nodes
+wt_capacities = [42]; % Corresponding capacities
 for i = 1:length(wt_nodes)
     node_index =wt_nodes(i);
     WT_capacities(node_index) = WT_capacities(node_index) + wt_capacities(i);
 end
+
+PG_capacities = zeros(16, 1);
+pg_nodes = [1,2,3,4,5,10]; % Nodes
+pg_capacities=[40,80,40,180,80,60];
+
+for i = 1:length(pg_nodes)
+    node_index =pg_nodes(i);
+    PG_capacities(node_index) = PG_capacities(node_index) + pg_capacities(i);
+end
+

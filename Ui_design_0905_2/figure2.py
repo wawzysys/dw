@@ -63,7 +63,7 @@ def figure2():
     ax.set_xlabel('小时(h)')
     ax.set_ylabel('节点')
     ax.set_zlabel('电价(CNY/kWh)')
-    ax.set_title('节点边际电价热力图', color='white')  # 将标题颜色设置为白色
+    ax.set_title('银山节点边际电价热力图', color='white')  # 将标题颜色设置为白色
 
     # 调整视角
     ax.view_init(elev=30, azim=45)  # 提高视角和旋转角度
@@ -79,4 +79,4 @@ def figure2():
     img_data = np.array(img)
     print("Image Array Shape: ", img_data.shape)  # 输出图像数组的形状
 
-# figure2()
+figure2()

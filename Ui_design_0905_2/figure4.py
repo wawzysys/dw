@@ -46,6 +46,7 @@ def figure4():
     rcParams['font.family'] = 'SimHei'
     rcParams['axes.unicode_minus'] = False  # 正确显示负号
     file_path = r'C:\Users\19160\Desktop\dw\plot_data2.xlsx'
+    # file_path = r'C:\Users\19160\Desktop\dw\plot_data.xlsx'
 
     # 读取数据
     figure5_SL_data = pd.read_excel(file_path, sheet_name='Figure5_SL')
@@ -65,7 +66,7 @@ def figure4():
     plt.scatter(key_l, key_l_SL, color='orange', label='关键线路', zorder=5)
     plt.xlabel('线路编号', fontsize=12, color='white')
     plt.ylabel('S(MVA)', fontsize=12, color='white')
-    plt.title('兴义系统线路传输容量', fontsize=14, color='white')
+    plt.title('银山系统线路传输容量', fontsize=14, color='white')
     plt.yticks(fontsize=10, color='white')
     plt.legend(fontsize=10, loc='upper left', facecolor='black', edgecolor='white', labelcolor='white')
     plt.grid(True, linestyle='-', alpha=0.7, color='white')

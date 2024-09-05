@@ -93,11 +93,11 @@ class myWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
     def on_item_clicked_2(self, item):
         if item.text() == '系统传输容量':
-            path1 = r'C:\Users\19160\Desktop\dw\Figure3.png'
+            path1 = r'C:\Users\19160\Desktop\dw\Figure4.png'
             self.label_10.clear()
             self.showImgInLabel(path1, self.label_10)
         elif item.text() == '新能源消纳率':
-            path2 = r'C:\Users\19160\Desktop\dw\Figure4.png'
+            path2 = r'C:\Users\19160\Desktop\dw\Figure3.png'
             self.label_10.clear()
             self.showImgInLabel(path2, self.label_10)
         elif item.text() == '消纳率响应前后对比':
@@ -159,8 +159,8 @@ class myWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         eng.addpath(absolute_matlab_path, nargout=0)
         print("开始运行2")
         #更改脚本名字
-        # function2 = 'key_line_xinyi'
-        function2 = 'key_line_yinshan'
+        function2 = 'key_line_xinyi'
+        # function2 = 'key_line_yinshan'
         # 执行脚本
         eng.run(function2, nargout=0)
         # eng.main(nargout=0)
