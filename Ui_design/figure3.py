@@ -50,6 +50,7 @@ def figure3():
                facecolor='black',
                edgecolor='black',
                labelcolor='green')
+    plt.show()
     plt.savefig('Figure3.png', dpi=300)
 
 

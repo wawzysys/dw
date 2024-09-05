@@ -1,0 +1,26 @@
+<RCC>
+  <qresource prefix="icon">
+    <file>btn345.gif</file>
+    <file>label_1.gif</file>
+    <file>btn1.gif</file>
+    <file>btn2.gif</file>
+    <file>tab1.gif</file>
+    <file>label.gif</file>
+    <file>label_1.gif</file>
+    <file>label_2.gif</file>
+    <file>btn3.gif</file>
+    <file>btn4.gif</file>
+    <file>btn5.gif</file>
+    <file>btn1.gif</file>
+    <file>btn2.gif</file>
+    <file>btn1.gif</file>
+    <file>icon.png</file>
+  </qresource>
+  <qresource prefix="image">
+    <file>blue.png</file>
+    <file>green.png</file>
+    <file>red.png</file>
+    <file>yellow.png</file>
+    <file>btn.png</file>
+  </qresource>
+</RCC>
